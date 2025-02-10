@@ -18,7 +18,7 @@ const { Content } = await render(note);
 	]}
 	data-pagefind-body={isPreview ? false : true}
 >
-	<Tag class="title" class:list={{ "": isPreview }}>
+	<Tag class="" class:list={{ "": isPreview }}>
 		{
 			isPreview ? (
 				<a class="" href={`/notes/${note.id}/`}>
