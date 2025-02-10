@@ -1,0 +1,30 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+import BaseLayout from "./Base.astro";
+import Masthead from "@/components/blog/Masthead.astro";
+
+interface Props {
+	post: CollectionEntry<"post">;
+}
+
+const { post } = Astro.props;
+const {
+	data: { description, ogImage, publishDate, title, updatedDate },
+	slug,
+} = post;
+const socialImage = ogImage ?? `/og-image/${slug}.png`;
+const articleDate = updatedDate?.toISOString() ?? publishDate.toISOString();
+const { headings } = await post.render();
+---
+
+<BaseLayout meta={{ articleDate, description, ogImage: socialImage, title }}>
+	<div class="">
+		<article class="" data-pagefind-body>
+			<div id="blog-hero"><Masthead content={post} /></div>
+			<div class="">
+				<slot />
+			</div>
+		</article>
+	</div>
+</BaseLayout>

@@ -17,3 +17,9 @@ export interface SiteMeta {
 	ogImage?: string | undefined;
 	title: string;
 }
+
+export interface PaginationLink {
+	srLabel?: string;
+	text?: string;
+	url: string;
+}

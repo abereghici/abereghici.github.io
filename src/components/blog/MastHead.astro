@@ -1,0 +1,69 @@
+---
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+import FormattedDate from "../FormattedDate.astro";
+
+interface Props {
+	content: CollectionEntry<"post">;
+}
+
+const {
+	content: { data, render },
+} = Astro.props;
+
+const { remarkPluginFrontmatter } = await render();
+
+const dateTimeOptions: Intl.DateTimeFormatOptions = {
+	month: "long",
+};
+---
+
+{
+	data.coverImage && (
+		<div class="">
+			<Image
+				alt={data.coverImage.alt}
+				class="object-cover"
+				fetchpriority="high"
+				loading="eager"
+				src={data.coverImage.src}
+			/>
+		</div>
+	)
+}
+{data.draft ? <span class="">(Draft)</span> : null}
+<h1 class="title">
+	{data.title}
+</h1>
+<div class="">
+	<p class="">
+		<FormattedDate date={data.publishDate} dateTimeOptions={dateTimeOptions} /> /{" "}
+		{remarkPluginFrontmatter.minutesRead}
+	</p>
+	{
+		data.updatedDate && (
+			<span class="">
+				Updated:
+				<FormattedDate class="" date={data.updatedDate} dateTimeOptions={dateTimeOptions} />
+			</span>
+		)
+	}
+</div>
+{
+	!!data.tags?.length && (
+		<div class="">
+			{data.tags.map((tag) => (
+				<>
+					<a
+						aria-label={`View more blogs with the tag ${tag}`}
+						class=""
+						data-pagefind-filter="tag"
+						href={`/tags/${tag}/`}
+					>
+						{tag}
+					</a>
+				</>
+			))}
+		</div>
+	)
+}
