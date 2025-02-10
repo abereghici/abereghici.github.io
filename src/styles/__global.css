@@ -1,0 +1,57 @@
+:root {
+	--color-moon-base: oklch(26.04% 0.039 287.73);
+	--color-moon-surface: oklch(28.75% 0.0435 289.09);
+	--color-moon-overlay: oklch(34.63% 0.0502 289.83);
+	--color-moon-muted: oklch(53.83% 0.0435 291.41);
+	--color-moon-subtle: oklch(65.39% 0.0444 291.23);
+	--color-moon-text: oklch(90.88% 0.0299 289.97);
+	--color-moon-love: oklch(69.77% 0.1565 4.22);
+	--color-moon-gold: oklch(84.29% 0.11 74.6);
+	--color-moon-rose: oklch(76.51% 0.0967 21.92);
+	--color-moon-pine: oklch(61.38% 0.0926 228);
+	--color-moon-foam: oklch(82.19% 0.0543 209.56);
+	--color-moon-iris: oklch(77.6% 0.0945 304.99);
+	--color-moon-highlight-low: oklch(28.94% 0.0398 287.8);
+	--color-moon-highlight-med: oklch(38.87% 0.0421 289.79);
+	--color-moon-highlight-high: oklch(45.35% 0.0454 291.02);
+
+	--color-dawn-base: oklch(96.99% 0.0113 71.9);
+	--color-dawn-surface: oklch(98.7% 0.0107 76.6);
+	--color-dawn-overlay: oklch(93.89% 0.0145 64.34);
+	--color-dawn-muted: oklch(67.34% 0.0268 298.37);
+	--color-dawn-subtle: oklch(57.68% 0.0458 291);
+	--color-dawn-text: oklch(45.97% 0.0629 289.56);
+	--color-dawn-love: oklch(59.89% 0.1071 2.66);
+	--color-dawn-gold: oklch(75.55% 0.1459 69.74);
+	--color-dawn-rose: oklch(69.57% 0.1058 23.03);
+	--color-dawn-pine: oklch(49.09% 0.077 228);
+	--color-dawn-foam: oklch(62.89% 0.0661 210.12);
+	--color-dawn-iris: oklch(61.71% 0.0738 305.7);
+	--color-dawn-highlight-low: oklch(95.02% 0.0101 58.21);
+	--color-dawn-highlight-med: oklch(89.2% 0.0057 31.06);
+	--color-dawn-highlight-high: oklch(84.31% 0.006 334);
+}
+
+:root body::before {
+	--line: color-mix(in lch, var(--color-dawn-highlight-high), transparent);
+}
+
+:root[data-theme="dark"] body::before {
+	--line: color-mix(in lch, var(--color-moon-highlight-high), transparent);
+}
+
+body::before {
+	--size: 100px;
+	position: fixed;
+	content: "";
+	height: 100vh;
+	width: 100vw;
+	background:
+		linear-gradient(90deg, var(--line) 1px, transparent 1px var(--size)) 0 -5vmin / var(--size)
+			var(--size),
+		linear-gradient(var(--line) 1px, transparent 1px var(--size)) 0 -5vmin / var(--size) var(--size);
+	mask: linear-gradient(-60deg, transparent 80%, white),
+		linear-gradient(60deg, transparent 80%, white);
+	top: 0;
+	z-index: -1;
+}

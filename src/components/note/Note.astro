@@ -12,12 +12,7 @@ const { as: Tag = "div", note, isPreview = false } = Astro.props;
 const { Content } = await render(note);
 ---
 
-<article
-	class:list={[
-		isPreview && "",
-	]}
-	data-pagefind-body={isPreview ? false : true}
->
+<article class:list={[isPreview && ""]} data-pagefind-body={isPreview ? false : true}>
 	<Tag class="" class:list={{ "": isPreview }}>
 		{
 			isPreview ? (
@@ -39,10 +34,7 @@ const { Content } = await render(note);
 		}}
 		date={note.data.publishDate}
 	/>
-	<div
-		class=""
-		class:list={{ "": isPreview }}
-	>
+	<div class="" class:list={{ "": isPreview }}>
 		<Content />
 	</div>
 </article>

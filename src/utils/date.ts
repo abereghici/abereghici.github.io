@@ -1,5 +1,5 @@
-import { siteConfig } from "@/site-config";
 import type { CollectionEntry } from "astro:content";
+import { siteConfig } from "@/site-config";
 
 export function getFormattedDate(
 	date: Date | undefined,
@@ -9,10 +9,10 @@ export function getFormattedDate(
 		return "Invalid Date";
 	}
 
-  console.log(date, options)
+	console.log(date, options);
 
 	return new Intl.DateTimeFormat(siteConfig.date.locale, {
-		...(siteConfig.date.options),
+		...siteConfig.date.options,
 		...options,
 	}).format(date);
 }

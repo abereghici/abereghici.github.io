@@ -1,7 +1,7 @@
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
-import robotsTxt from "astro-robots-txt";
 import icon from "astro-icon";
+import robotsTxt from "astro-robots-txt";
 import webmanifest from "astro-webmanifest";
 import { defineConfig } from "astro/config";
 
@@ -53,4 +53,9 @@ export default defineConfig({
 			},
 		}),
 	],
+	markdown: {
+		shikiConfig: {
+			theme: "css-variables",
+		},
+	},
 });
