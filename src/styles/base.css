@@ -1,0 +1,48 @@
+@layer base {
+	/* Set light color scheme */
+	[data-theme="light"] {
+		color-scheme: light;
+	}
+
+	/* Set dark color scheme */
+	[data-theme="dark"] {
+		color-scheme: dark;
+	}
+
+	::selection {
+		background: var(--selection);
+	}
+
+	html {
+		scroll-behavior: smooth;
+		scrollbar-gutter: stable;
+	}
+
+	body {
+		background-color: var(--background-primary);
+		color: var(--text-primary);
+		font: var(--typography-body-01);
+	}
+
+	/* Setup the focus ring for interactive elements */
+	:where(a, button, input, textarea) {
+		--outline-size: 3px;
+		--outline-offset: 3px;
+		--outline-style: solid;
+		--outline-color: var(--focus-ring);
+
+		&:focus-visible,
+		&:active {
+			outline-color: var(--focus-ring);
+		}
+
+		&:where(:not(:active)):focus-visible {
+			outline: var(--outline-size) var(--outline-style) var(--outline-color);
+			outline-offset: var(--outline-offset, var(--outline-size));
+		}
+
+		@media (prefers-reduced-motion: no-preference) {
+			transition: outline-offset 150ms ease;
+		}
+	}
+}
