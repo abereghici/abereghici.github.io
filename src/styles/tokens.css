@@ -67,6 +67,7 @@
 		--background-secondary: var(--color-surface);
 		--background-tertiary: var(--color-overlay);
 		--text-primary: var(--color-text);
+		--text-secondary: var(--color-subtle);
 		--divider-primary: var(--color-highlight-high);
 		--divider-secondary: color-mix(in oklch, var(--color-muted), transparent 80%);
 		--menu-link-background: var(--color-muted-15);
@@ -167,8 +168,8 @@
 		--border-size-02: 2px;
 
 		/* Layout */
-		--container-max-width: 72rem;
-		--container-breakout: 18rem;
+		--container-max-width: 60rem;
+		--container-breakout: 12rem;
 		--stack-spacing: 1em;
 	}
 }
