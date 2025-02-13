@@ -1,22 +1,6 @@
-<theme-toggle class="">
-	<button class="" type="button">
-		<span class="">Dark Theme</span>
-		<svg
-			aria-hidden="true"
-			class=""
-			fill="none"
-			focusable="false"
-			id="sun-svg"
-			viewBox="0 0 24 24"
-			xmlns="http://www.w3.org/2000/svg"
-		>
-			<path
-				xmlns="http://www.w3.org/2000/svg"
-				d="m12 22c5.5228475 0 10-4.4771525 10-10s-4.4771525-10-10-10-10 4.4771525-10 10 4.4771525 10 10 10zm0-1.5v-17c4.6944204 0 8.5 3.80557963 8.5 8.5 0 4.6944204-3.8055796 8.5-8.5 8.5z"
-				fill="currentColor"
-			>
-			</path>
-		</svg>
+<theme-toggle class="theme-toggle">
+	<button class="theme-toggle__button" type="button">
+		<span class="sr-only">Dark Theme</span>
 	</button>
 </theme-toggle>
 
@@ -50,3 +34,23 @@
 
 	customElements.define("theme-toggle", ThemeToggle);
 </script>
+
+<style>
+	.theme-toggle {
+		display: inline-flex;
+		padding: var(--spacing-03);
+
+		.theme-toggle__button {
+			--size: 20px;
+			width: var(--size);
+			height: var(--size);
+			border-radius: 50%;
+			border: 0;
+			background: var(--theme-toggle-background);
+
+			@media (prefers-reduced-motion: no-preference) {
+				transition: background 250ms ease;
+			}
+		}
+	}
+</style>

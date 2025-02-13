@@ -40,23 +40,4 @@
 	.stack > * + * {
 		margin-top: var(--stack-spacing, 1em);
 	}
-
-	/* Typography */
-	.typography-display-01 {
-		font: var(--typography-display-01-mobile);
-		letter-spacing: -0.025em;
-
-		@media (--tablet) {
-			font: var(--typography-display-01-desktop);
-		}
-	}
-
-	.typography-body-01 {
-		font: var(--typography-body-01);
-	}
-
-	.typography-supporting-01 {
-		font: var(--typography-supporting-01);
-		color: var(--color-subtle);
-	}
 }

@@ -1,1 +1,32 @@
-<a class="" href="#main">skip to content </a>
+<div class="container skip-content">
+	<a class="skip-content__link" href="#main">skip to content</a>
+</div>
+
+<style>
+	.skip-content {
+		position: absolute;
+		z-index: 1;
+		width: 100%;
+		transform: translateY(-6rem);
+		background: var(--background-tertiary);
+		padding: var(--spacing-04) 0;
+		border-bottom: var(--border-size-01) solid var(--divider-primary);
+
+		@media (prefers-reduced-motion: no-preference) {
+			transition: transform 150ms ease;
+		}
+
+		&:has(.skip-content__link:focus) {
+			transform: translateY(0);
+		}
+
+		.skip-content__link {
+			margin-inline: auto;
+			border-radius: var(--radius-01);
+			color: var(--text-primary);
+			font: normal var(--font-weight-07) var(--font-size-01) / var(--font-line-height-02)
+				var(--font-sans);
+			text-decoration: none;
+		}
+	}
+</style>

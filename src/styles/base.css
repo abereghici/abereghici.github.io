@@ -15,17 +15,26 @@
 
 	html {
 		scroll-behavior: smooth;
-		scrollbar-gutter: stable;
 	}
 
 	body {
 		background-color: var(--background-primary);
 		color: var(--text-primary);
-		font: var(--typography-body-01);
+		font: normal var(--font-weight-04) var(--font-size-03) / var(--font-line-height-04)
+			var(--font-sans);
+	}
+
+	a:not([class]) {
+		text-decoration-skip-ink: auto;
+		color: currentColor;
+	}
+
+	button {
+		cursor: pointer;
 	}
 
 	/* Setup the focus ring for interactive elements */
-	:where(a, button, input, textarea) {
+	:where(a, button, input, textarea, summary) {
 		--outline-size: 3px;
 		--outline-offset: 3px;
 		--outline-style: solid;

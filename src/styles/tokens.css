@@ -40,6 +40,7 @@
 		--color-surface: light-dark(var(--color-dawn-surface), var(--color-moon-surface));
 		--color-overlay: light-dark(var(--color-dawn-overlay), var(--color-moon-overlay));
 		--color-muted: light-dark(var(--color-dawn-muted), var(--color-moon-muted));
+		--color-muted-15: color-mix(in oklch, var(--color-muted), transparent 85%);
 		--color-subtle: light-dark(var(--color-dawn-subtle), var(--color-moon-subtle));
 		--color-text: light-dark(var(--color-dawn-text), var(--color-moon-text));
 		--color-love: light-dark(var(--color-dawn-love), var(--color-moon-love));
@@ -63,7 +64,13 @@
 
 		/* Semantic colors */
 		--background-primary: var(--color-base);
+		--background-secondary: var(--color-surface);
+		--background-tertiary: var(--color-overlay);
 		--text-primary: var(--color-text);
+		--divider-primary: var(--color-highlight-high);
+		--divider-secondary: color-mix(in oklch, var(--color-muted), transparent 80%);
+		--menu-link-background: var(--color-muted-15);
+		--theme-toggle-background: light-dark(var(--color-moon-muted), var(--color-moon-gold));
 
 		/* Code colors */
 		--astro-code-foreground: var(--color-text);
@@ -86,22 +93,42 @@
 		--selection: color-mix(in oklch, var(--color-muted), transparent 20%);
 
 		/* Fonts */
-		--font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+		--font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
 			Segoe UI Symbol, "Noto Color Emoji";
-		--font-family-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono,
+		--font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+		--font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono,
 			Courier New, monospace;
-		--font-family-display: "Pier Sans", var(--font-family);
+		--font-display: "Pier Sans", var(--font-sans);
 
-		--font-weight-bold: 700;
-		--font-weight-medium: 500;
-		--font-weight-light: 400;
+		--font-weight-01: 100;
+		--font-weight-02: 200;
+		--font-weight-03: 300;
+		--font-weight-04: 400;
+		--font-weight-05: 500;
+		--font-weight-06: 600;
+		--font-weight-07: 700;
 
-		--typography-display-01-desktop: normal var(--font-weight-bold) 6rem/1
-			var(--font-family-display);
-		--typography-display-01-mobile: normal var(--font-weight-bold) 3rem/1 var(--font-family-display);
+		--font-size-01: 0.875rem;
+		--font-size-02: 0.9375rem;
+		--font-size-03: 1rem;
+		--font-size-04: 1.125rem;
+		--font-size-05: 1.25rem;
+		--font-size-06: 1.5rem;
+		--font-size-07: 2rem;
+		--font-size-08: 2.5rem;
+		--font-size-09: 3rem;
+		--font-size-10: 3.5rem;
+		--font-size-11: 4rem;
+		--font-size-12: 6rem;
 
-		--typography-body-01: normal var(--font-weight-light) 1rem/1.5rem var(--font-family);
-		--typography-supporting-01: normal var(--font-weight-light) 1.25rem/1.75rem var(--font-family);
+		--font-line-height-01: 1.1;
+		--font-line-height-02: 1.25;
+		--font-line-height-03: 1.375;
+		--font-line-height-04: 1.5;
+		--font-line-height-05: 1.75;
+		--font-line-height-06: 2;
+
+		--font-letterspacing-01: -0.025em;
 
 		/* Spacing */
 		--spacing-px-01: 4px;
@@ -127,6 +154,17 @@
 		--spacing-08: 4rem;
 		--spacing-09: 5rem;
 		--spacing-10: 6rem;
+
+		/* Radii */
+		--radius-01: 2px;
+		--radius-02: 4px;
+		--radius-03: 6px;
+		--radius-04: 8px;
+		--radius-05: 12px;
+
+		/* Borders */
+		--border-size-01: 1px;
+		--border-size-02: 2px;
 
 		/* Layout */
 		--container-max-width: 72rem;
