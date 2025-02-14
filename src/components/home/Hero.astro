@@ -1,22 +1,134 @@
-<section class="hero container">
-	<h1 class="hero__title">Alexandru Bereghici</h1>
-	<p class="hero__description">Web developer</p>
-</section>
+<div class="container animate-enter">
+	<section class="hero">
+		<div>
+			<h1 class="hero__title">Alexandru Bereghici</h1>
+			<p class="hero__description">Software engineer in web development</p>
+		</div>
+		<div>
+			<div class="hero__terminal">
+				<div class="hero__terminal__bar">
+					<div class="hero__terminal__btn"></div>
+				</div>
+				<div class="hero__terminal__body">
+					<div class="hero__terminal__prompt">
+						$ <span class="hero__terminal__command">echo hi</span>
+					</div>
+					<div class="hero__terminal__prompt">hi</div>
+					<div class="hero__terminal__prompt">$ <span class="hero__terminal__pulse">_</span></div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
 
 <style>
 	.hero {
-		padding-block: var(--spacing-05);
+		display: grid;
+		gap: var(--spacing-03);
+		padding-block: var(--spacing-10);
+
+		@media (--tablet) {
+			grid-template-columns: 1fr minmax(0, 1fr);
+		}
 
 		.hero__title {
 			font: normal var(--font-weight-07) var(--font-size-09) / var(--font-line-height-01)
 				var(--font-display);
 			letter-spacing: var(--font-letterspacing-01);
+
+			@media (--mobile) {
+				text-align: center;
+			}
 		}
 
 		.hero__description {
-			font: normal var(--font-weight-04) var(--font-size-06) / var(--font-line-height-02)
+			font: normal var(--font-weight-04) var(--font-size-05) / var(--font-line-height-02)
 				var(--font-sans);
 			color: var(--text-secondary);
+			margin-block: var(--spacing-03);
+
+			@media (--mobile) {
+				text-align: center;
+			}
+		}
+
+		.hero__terminal {
+			--background: var(--background-tertiary);
+			--bar-height: 36px;
+			--btn-size: 12px;
+
+			margin: 0 auto 2rem;
+			border-radius: 0 0 0.1rem 0.1rem;
+
+			.hero__terminal__bar {
+				background: var(--background);
+				height: var(--bar-height);
+				border-radius: 0.5rem 0.5rem 0 0;
+				border: 1px solid var(--divider-secondary);
+			}
+
+			.hero__terminal__btn::before,
+			.hero__terminal__btn::after,
+			.hero__terminal__btn {
+				width: var(--btn-size);
+				height: var(--btn-size);
+				border-radius: 100%;
+				display: block;
+				background: var(--color-gold);
+				position: relative;
+				margin-left: 40px;
+				top: 12px;
+
+				&::before,
+				&::after {
+					content: " ";
+					position: absolute;
+					top: 0;
+				}
+
+				&::before {
+					background: var(--color-rose);
+					margin-left: -20px;
+				}
+				&::after {
+					background: var(--color-foam);
+					margin-left: 20px;
+				}
+			}
+
+			.hero__terminal__body {
+				height: 10rem;
+				padding: var(--spacing-04);
+				background: var(--background-secondary);
+				border: 1px solid var(--divider-secondary);
+				border-top: 0;
+				font: normal var(--font-weight-07) var(--font-size-01) / var(--font-line-height-04)
+					var(--font-mono);
+
+				.hero__terminal__pulse {
+					animation: pulse 1s ease-in-out infinite;
+				}
+
+				.hero__terminal__comment {
+					color: var(--color-subtle);
+				}
+
+				.hero__terminal__command {
+					color: var(--color-pine);
+				}
+			}
+		}
+	}
+
+	@keyframes pulse {
+		0% {
+			opacity: 0;
+		}
+		50% {
+			opacity: 1;
+		}
+		100% {
+			opacity: 0;
 		}
 	}
 </style>

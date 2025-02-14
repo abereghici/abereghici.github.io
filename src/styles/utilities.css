@@ -10,4 +10,25 @@
 		white-space: nowrap;
 		border-width: 0;
 	}
+
+	.animate-enter {
+		--stagger: 1;
+		@media (prefers-reduced-motion: no-preference) {
+			opacity: 0;
+			animation: enter 500ms forwards;
+			animation-delay: calc(var(--stagger) * 200ms);
+		}
+	}
+
+	@keyframes enter {
+		from {
+			opacity: 0;
+			transform: translateY(10px);
+		}
+
+		to {
+			opacity: 1;
+			transform: none;
+		}
+	}
 }

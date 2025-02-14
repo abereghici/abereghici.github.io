@@ -9,8 +9,6 @@ export function getFormattedDate(
 		return "Invalid Date";
 	}
 
-	console.log(date, options);
-
 	return new Intl.DateTimeFormat(siteConfig.date.locale, {
 		...siteConfig.date.options,
 		...options,
