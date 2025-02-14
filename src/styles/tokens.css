@@ -155,6 +155,7 @@
 		--spacing-08: 4rem;
 		--spacing-09: 5rem;
 		--spacing-10: 6rem;
+		--spacing-11: 9rem;
 
 		/* Radii */
 		--radius-01: 2px;
@@ -168,7 +169,7 @@
 		--border-size-02: 2px;
 
 		/* Layout */
-		--container-max-width: 60rem;
+		--container-max-width: 70rem;
 		--container-breakout: 12rem;
 		--stack-spacing: 1em;
 	}

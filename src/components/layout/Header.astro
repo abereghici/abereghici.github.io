@@ -8,7 +8,7 @@ function isCurrentPage(url: string) {
 }
 ---
 
-<div class="container">
+<div class="container sticky">
 	<header id="main-header" class="main-header">
 		<a
 			class="logo"
@@ -113,12 +113,32 @@ function isCurrentPage(url: string) {
 </div>
 
 <style>
+	@keyframes scroll-shadow {
+		from {
+			box-shadow: none;
+			padding: var(--spacing-03) 0;
+		}
+		to {
+			box-shadow: var(--divider-secondary) 0 1px;
+			padding: 0;
+		}
+	}
+	.sticky {
+		position: sticky;
+		top: 0;
+		background: var(--background-primary);
+		z-index: 1;
+
+		animation: scroll-shadow linear both;
+		animation-timeline: scroll();
+		animation-range: 0ex 5ex;
+	}
+
 	.main-header {
 		display: flex;
 		justify-items: center;
 		align-items: center;
 		gap: var(--spacing-04);
-		padding: var(--spacing-03) 0;
 	}
 
 	.logo {

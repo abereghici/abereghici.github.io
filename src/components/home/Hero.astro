@@ -3,6 +3,7 @@
 		<div>
 			<h1 class="hero__title">Alexandru Bereghici</h1>
 			<p class="hero__description">Software engineer in web development</p>
+			<p class="hero__description">Based in Chisinau, Moldova</p>
 		</div>
 		<div>
 			<div class="hero__terminal">
@@ -25,9 +26,10 @@
 	.hero {
 		display: grid;
 		gap: var(--spacing-03);
-		padding-block: var(--spacing-10);
+		padding-block: var(--spacing-08);
 
 		@media (--tablet) {
+			padding-block: var(--spacing-11);
 			grid-template-columns: 1fr minmax(0, 1fr);
 		}
 
@@ -35,9 +37,16 @@
 			font: normal var(--font-weight-07) var(--font-size-09) / var(--font-line-height-01)
 				var(--font-display);
 			letter-spacing: var(--font-letterspacing-01);
+			margin-block-end: var(--spacing-03);
+			text-align: center;
 
-			@media (--mobile) {
-				text-align: center;
+			@media (--tablet) {
+				text-align: initial;
+				font-size: var(--font-size-11);
+			}
+
+			@media (--desktop) {
+				font-size: var(--font-size-12);
 			}
 		}
 
@@ -45,7 +54,6 @@
 			font: normal var(--font-weight-04) var(--font-size-05) / var(--font-line-height-02)
 				var(--font-sans);
 			color: var(--text-secondary);
-			margin-block: var(--spacing-03);
 
 			@media (--mobile) {
 				text-align: center;
@@ -54,7 +62,8 @@
 
 		.hero__terminal {
 			--background: var(--background-tertiary);
-			--bar-height: 36px;
+			--bar-height: 2rem;
+			--body-height: 15rem;
 			--btn-size: 12px;
 
 			margin: 0 auto 2rem;
@@ -97,12 +106,12 @@
 			}
 
 			.hero__terminal__body {
-				height: 10rem;
+				min-height: var(--body-height);
 				padding: var(--spacing-04);
 				background: var(--background-secondary);
 				border: 1px solid var(--divider-secondary);
 				border-top: 0;
-				font: normal var(--font-weight-07) var(--font-size-01) / var(--font-line-height-04)
+				font: normal var(--font-weight-07) var(--font-size-04) / var(--font-line-height-04)
 					var(--font-mono);
 
 				.hero__terminal__pulse {

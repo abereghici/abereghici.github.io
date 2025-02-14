@@ -1,0 +1,42 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getAllPosts } from "@/data/post";
+import { collectionDateSort } from "@/utils/date";
+import ArticlePreview from "../ArticlePreview.astro";
+
+// Posts
+const MAX_POSTS = 10;
+const allPosts = await getAllPosts();
+const allPostsByDate = [...allPosts, ...allPosts, ...allPosts]
+	.sort(collectionDateSort)
+	.slice(0, MAX_POSTS) as CollectionEntry<"post">[];
+---
+
+<div class="container animate-enter">
+	<h2>Latest posts</h2>
+
+	<ul class="latest-posts">
+		{
+			allPostsByDate.map((p) => (
+				<li>
+					<ArticlePreview post={p} />
+				</li>
+			))
+		}
+	</ul>
+</div>
+
+<style>
+	.latest-posts {
+		list-style: none;
+		padding: var(--spacing-04) 0;
+
+		display: grid;
+		gap: var(--spacing-04);
+		grid-template-columns: repeat(1, minmax(0px, 1fr));
+
+		@media (--tablet) {
+			grid-template-columns: repeat(3, minmax(0px, 1fr));
+		}
+	}
+</style>

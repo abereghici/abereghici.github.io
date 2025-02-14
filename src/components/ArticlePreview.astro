@@ -1,0 +1,91 @@
+---
+import type { HTMLTag, Polymorphic } from "astro/types";
+import type { CollectionEntry } from "astro:content";
+import FormattedDate from "./FormattedDate.astro";
+
+type Props<Tag extends HTMLTag> = Polymorphic<{ as: Tag }> & {
+	post: CollectionEntry<"post"> | CollectionEntry<"note">;
+	withDesc?: boolean;
+};
+
+const { post, withDesc = true } = Astro.props;
+---
+
+<article class="article-preview">
+	<a class="article-preview__anchor" data-astro-prefetch href={`/posts/${post.slug}/`}>
+		<div class="article-preview__background"></div>
+		<div class="article-preview__content">
+			<h3 class="article-preview__content__title">{post.data.title}</h3>
+			<FormattedDate class="article-preview__content__date" date={post.data.publishDate} />
+			{withDesc && <p class="article-preview__content__description">{post.data.description}</p>}
+		</div>
+	</a>
+</article>
+
+<style>
+	.article-preview {
+		position: relative;
+
+		.article-preview__anchor {
+			display: block;
+			text-decoration: none;
+			border-radius: var(--radius-05);
+			color: var(--text-primary);
+		}
+
+		.article-preview__content {
+			border: 1px dashed var(--divider-primary);
+			border-radius: var(--radius-05);
+			background: var(--background-secondary);
+			padding: var(--spacing-03);
+			display: flex;
+			flex-flow: column;
+			gap: var(--spacing-02);
+
+			@media (--tablet) {
+				padding: var(--spacing-04);
+			}
+
+			@media (--desktop) {
+				padding: var(--spacing-06);
+			}
+
+			.article-preview__content__title {
+				font: normal var(--font-weight-07) var(--font-size-04) / var(--font-line-height-02)
+					var(--font-sans);
+			}
+
+			.article-preview__content__date {
+				font: normal var(--font-weight-06) var(--font-size-01) / var(--font-line-height-02)
+					var(--font-sans);
+				color: var(--text-secondary);
+			}
+
+			.article-preview__content__description {
+				font: normal var(--font-weight-04) var(--font-size-01) / var(--font-line-height-02)
+					var(--font-sans);
+				color: var(--text-secondary);
+			}
+		}
+
+		.article-preview__background {
+			content: "";
+			position: absolute;
+			inset: 0;
+			z-index: -1;
+			border: 1px dashed var(--divider-primary);
+			border-radius: var(--radius-05);
+		}
+
+		@media (prefers-reduced-motion: no-preference) {
+			.article-preview__content {
+				transition: transform 250ms ease;
+			}
+
+			&:hover:not(:focus-within) .article-preview__content {
+				--offset: calc(var(--spacing-px-02) * -1);
+				transform: translate(var(--offset), var(--offset));
+			}
+		}
+	}
+</style>
