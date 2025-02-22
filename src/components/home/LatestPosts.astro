@@ -5,14 +5,14 @@ import { collectionDateSort } from "@/utils/date";
 import ArticlePreview from "../ArticlePreview.astro";
 
 // Posts
-const MAX_POSTS = 10;
+const MAX_POSTS = 3;
 const allPosts = await getAllPosts();
-const allPostsByDate = [...allPosts, ...allPosts, ...allPosts]
+const allPostsByDate = allPosts
 	.sort(collectionDateSort)
 	.slice(0, MAX_POSTS) as CollectionEntry<"post">[];
 ---
 
-<div class="container animate-enter">
+<section>
 	<h2>Latest posts</h2>
 
 	<ul class="latest-posts">
@@ -24,7 +24,7 @@ const allPostsByDate = [...allPosts, ...allPosts, ...allPosts]
 			))
 		}
 	</ul>
-</div>
+</section>
 
 <style>
 	.latest-posts {

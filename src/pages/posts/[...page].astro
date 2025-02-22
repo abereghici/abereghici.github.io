@@ -1,10 +1,10 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import Pagination from "@/components/Paginator.astro";
-import PostPreview from "@/components/blog/PostPreview.astro";
 import { getAllPosts, getUniqueTags, groupPostsByYear, sortMDByDate } from "@/data/post";
 import PageLayout from "@/layouts/Base.astro";
 import type { GetStaticPaths, Page } from "astro";
+import ArticlePreview from "@/components/ArticlePreview.astro";
 
 export const getStaticPaths = (async ({ paginate }) => {
 	const MAX_POSTS_PER_PAGE = 10;
@@ -19,7 +19,7 @@ interface Props {
 	uniqueTags: string[];
 }
 
-const { page, uniqueTags } = Astro.props;
+const { page } = Astro.props;
 
 const meta = {
 	description: "Read my collection of posts and the things that interest me",
@@ -46,17 +46,17 @@ const descYearKeys = Object.keys(groupedByYear).sort((a, b) => +b - +a);
 ---
 
 <PageLayout meta={meta}>
-	<h1 class="">Posts</h1>
-	<div class="">
+	<div class="posts">
+		<h1 class="posts__title">Posts</h1>
 		<section aria-label="Blog post list">
 			{
 				descYearKeys.map((yearKey) => (
 					<>
-						<h2 class="">{yearKey}</h2>
-						<ul class="">
+						<h2 class="posts__year">{yearKey}</h2>
+						<ul class="posts__list">
 							{groupedByYear[yearKey]?.map((p) => (
 								<li class="">
-									<PostPreview post={p} />
+									<ArticlePreview post={p} />
 								</li>
 							))}
 						</ul>
@@ -65,30 +65,26 @@ const descYearKeys = Object.keys(groupedByYear).sort((a, b) => +b - +a);
 			}
 			<Pagination {...paginationProps} />
 		</section>
-		{
-			!!uniqueTags.length && (
-				<aside>
-					<h2 class="">Tags</h2>
-					<ul class="">
-						{uniqueTags.map((tag) => (
-							<li>
-								<a
-									aria-label={`View all posts with the tag: ${tag}`}
-									class=""
-									href={`/tags/${tag}/`}
-								>
-									{tag}
-								</a>
-							</li>
-						))}
-					</ul>
-					<span class="">
-						<a aria-label="View all blog categories" class="" href="/tags/">
-							View all →
-						</a>
-					</span>
-				</aside>
-			)
-		}
 	</div>
 </PageLayout>
+
+<style>
+	.posts {
+		margin-block-start: var(--spacing-08);
+
+		.posts__title {
+			margin-block: var(--spacing-03);
+		}
+
+		.posts__year {
+			color: var(--text-secondary);
+			font: italic var(--font-weight-06) var(--font-size-06) / var(--font-line-height-04)
+				var(--font-serif);
+		}
+
+		.posts__list {
+			list-style: none;
+			padding: var(--spacing-04) 0;
+		}
+	}
+</style>

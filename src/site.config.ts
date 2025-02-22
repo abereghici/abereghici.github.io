@@ -25,11 +25,20 @@ export const menuLinks: { path: string; title: string }[] = [
 		title: "Posts",
 	},
 	{
-		path: "/notes/",
-		title: "Notes",
-	},
-	{
 		path: "/about",
 		title: "About",
+	},
+];
+
+export const socialLinks: { title: string; href: string; icon: string }[] = [
+	{
+		title: "LinkedIn",
+		icon: "linkedin",
+		href: "https://www.linkedin.com/in/alexandrubereghici/",
+	},
+	{
+		title: "Github",
+		icon: "github",
+		href: "https://github.com/abereghici",
 	},
 ];

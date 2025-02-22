@@ -8,10 +8,8 @@ interface Props {
 }
 
 const {
-	content: { data, render },
+	content: { data },
 } = Astro.props;
-
-const { remarkPluginFrontmatter } = await render();
 
 const dateTimeOptions: Intl.DateTimeFormatOptions = {
 	month: "long",
@@ -37,33 +35,6 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
 </h1>
 <div class="">
 	<p class="">
-		<FormattedDate date={data.publishDate} dateTimeOptions={dateTimeOptions} /> /{" "}
-		{remarkPluginFrontmatter.minutesRead}
+		<FormattedDate date={data.publishDate} dateTimeOptions={dateTimeOptions} />
 	</p>
-	{
-		data.updatedDate && (
-			<span class="">
-				Updated:
-				<FormattedDate class="" date={data.updatedDate} dateTimeOptions={dateTimeOptions} />
-			</span>
-		)
-	}
 </div>
-{
-	!!data.tags?.length && (
-		<div class="">
-			{data.tags.map((tag) => (
-				<>
-					<a
-						aria-label={`View more blogs with the tag ${tag}`}
-						class=""
-						data-pagefind-filter="tag"
-						href={`/tags/${tag}/`}
-					>
-						{tag}
-					</a>
-				</>
-			))}
-		</div>
-	)
-}
