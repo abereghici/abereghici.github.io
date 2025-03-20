@@ -1,0 +1,19 @@
+---
+import { cn } from "@/lib/utils";
+import type { HTMLAttributes } from "astro/types";
+
+export interface Props extends HTMLAttributes<"a"> {
+  href: string;
+}
+
+const { href, class: className = "", ...restProps } = Astro.props;
+
+const combinedClass = cn(
+  "rounded-md px-2.5 py-1.5 text-[15px] font-semibold transition hover:bg--muted/10 ",
+  className,
+);
+---
+
+<a href={href} class={combinedClass} {...restProps}>
+  <slot />
+</a>

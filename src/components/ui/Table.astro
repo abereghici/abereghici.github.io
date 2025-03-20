@@ -1,0 +1,20 @@
+---
+import { cn } from "@/lib/utils";
+import type { HTMLAttributes } from "astro/types";
+
+export interface Props extends HTMLAttributes<"table"> {}
+
+const { class: className, ...rest } = Astro.props;
+---
+
+<table class={cn("custom-table", className)} {...rest}>
+  <slot />
+</table>
+
+<style>
+  @reference "@/styles/global.css";
+
+  .custom-table {
+    @apply w-full min-w-max overflow-x-scroll;
+  }
+</style>

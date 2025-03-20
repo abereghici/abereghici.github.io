@@ -1,0 +1,71 @@
+---
+import Blockquote from "@/components/ui/Blockquote.astro";
+import Code from "@/components/ui/Code.astro";
+import Heading1 from "@/components/ui/Heading1.astro";
+import Heading2 from "@/components/ui/Heading2.astro";
+import Heading3 from "@/components/ui/Heading3.astro";
+import Image from "@/components/ui/Image.astro";
+import KeyboardInput from "@/components/ui/KeyboardInput.astro";
+import Link from "@/components/ui/Link.astro";
+import Mark from "@/components/ui/Mark.astro";
+import OrderedList from "@/components/ui/OrderedList.astro";
+import Paragraph from "@/components/ui/Paragraph.astro";
+import PreformattedText from "@/components/ui/PreformattedText.astro";
+import Table from "@/components/ui/Table.astro";
+import UnorderedList from "@/components/ui/UnorderedList.astro";
+import Video from "@/components/ui/Video.astro";
+import Layout from "@/layouts/Layout.astro";
+import { formatDate } from "@/lib/utils";
+import { type CollectionEntry, getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("posts");
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: post,
+  }));
+}
+type Props = CollectionEntry<"posts">;
+
+const post = Astro.props;
+const { Content } = await post.render();
+---
+
+<Layout
+  title={post.data.title}
+  description={post.data.description}
+  image={post.data.image}
+>
+  <main>
+    <h1 class="mb-5 text-xl font-bold">
+      {post.data.title}
+    </h1>
+    <p class="text-subtle mb-1 text-sm font-medium">
+      {formatDate(post.data.date)}
+    </p>
+    <article>
+      <Content
+        components={{
+          a: Link,
+          h1: Heading1,
+          h2: Heading2,
+          h3: Heading3,
+          h4: Heading3,
+          h5: Heading3,
+          h6: Heading3,
+          p: Paragraph,
+          img: Image,
+          blockquote: Blockquote,
+          table: Table,
+          pre: PreformattedText,
+          code: Code,
+          ul: UnorderedList,
+          ol: OrderedList,
+          Mark,
+          Video,
+          Kbd: KeyboardInput,
+        }}
+      />
+    </article>
+  </main>
+</Layout>

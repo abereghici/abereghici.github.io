@@ -1,0 +1,16 @@
+---
+import { cn } from "@/lib/utils";
+import type { HTMLAttributes } from "astro/types";
+
+export interface Props extends HTMLAttributes<"kbd"> {}
+
+const { class: className, ...rest } = Astro.props;
+---
+
+<kbd
+  class={cn(
+    "rounded-sm border border-b-2 bg-surface px-1 py-0.5 font-mono text-xs font-medium",
+    className,
+  )}
+  {...rest}><slot /></kbd
+>

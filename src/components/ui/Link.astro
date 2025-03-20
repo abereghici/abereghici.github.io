@@ -1,0 +1,33 @@
+---
+import { cn } from "@/lib/utils";
+import type { HTMLAttributes } from "astro/types";
+
+// Create an interface that extends HTML anchor element attributes
+export interface Props extends HTMLAttributes<"a"> {
+  underline?: boolean;
+  external?: boolean;
+}
+
+const {
+  href,
+  class: className = "",
+  underline = true,
+  external = false,
+  target,
+  rel,
+  ...rest
+} = Astro.props;
+
+// Set target and rel attributes for external links
+const externalAttributes = external
+  ? { target: target || "_blank", rel: rel || "noopener noreferrer" }
+  : { target, rel };
+
+// Combine default styles with optional class and underline prop
+const combinedClass = cn("text-iris ", underline && "underline", className);
+---
+
+<a href={href} class={combinedClass} {...externalAttributes} {...rest}>
+  <slot />
+  {external && <span class="sr-only">(opens in new tab)</span>}
+</a>

@@ -1,0 +1,35 @@
+---
+import { cn } from "@/lib/utils";
+import type { HTMLAttributes } from "astro/types";
+
+export interface Props extends HTMLAttributes<"code"> {}
+
+const { class: className, ...rest } = Astro.props;
+
+// Base styles applied to all code blocks
+const baseStyles =
+  "font-mono font-medium text-sm bg-surface border-highlight-high";
+
+// Styles appleid when the code block is inline
+const inlineStyles = [
+  "not-group-has-[pre]:rounded-sm",
+  "not-group-has-[pre]:border",
+  "not-group-has-[pre]:px-1",
+  "not-group-has-[pre]:py-0.5",
+  "not-group-has-[pre]:whitespace-nowrap",
+];
+
+// Styles applied when inside a pre element (using the group selector)
+const preGroupStyles = [
+  "group-has-[pre]:p-4",
+  "group-has-[pre]:rounded-lg",
+  "group-has-[pre]:overflow-auto",
+  "group-has-[pre]:my-4",
+  "group-has-[pre]:block",
+  "group-has-[pre]:max-h-[600px]",
+].join(" ");
+---
+
+<code class={cn(baseStyles, inlineStyles, preGroupStyles, className)} {...rest}
+  ><slot /></code
+>

@@ -1,0 +1,10 @@
+---
+import { cn } from "@/lib/utils";
+import type { HTMLAttributes } from "astro/types";
+
+export interface Props extends HTMLAttributes<"img"> {}
+
+const { class: className, ...rest } = Astro.props;
+---
+
+<img class={cn("my-4 rounded-lg border-highlight-high", className)} {...rest} />
