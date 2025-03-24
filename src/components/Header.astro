@@ -1,6 +1,5 @@
 ---
 import NavLink from "@/components/ui/NavLink.astro";
-import { EMAIL } from "@/consts";
 import ThemeToggle from "./ThemeToggle.astro";
 ---
 
@@ -8,7 +7,6 @@ import ThemeToggle from "./ThemeToggle.astro";
   <nav class="-mx-2.5 flex items-center gap-4">
     <NavLink href="/">home</NavLink>
     <NavLink href="/posts">posts</NavLink>
-    <NavLink href={`mailto:${EMAIL}`}>email</NavLink>
   </nav>
   <ThemeToggle />
 </header>

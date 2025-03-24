@@ -24,7 +24,7 @@ const externalAttributes = external
   : { target, rel };
 
 // Combine default styles with optional class and underline prop
-const combinedClass = cn("text-iris ", underline && "underline", className);
+const combinedClass = cn("text-text", underline && "underline", className);
 ---
 
 <a href={href} class={combinedClass} {...externalAttributes} {...rest}>

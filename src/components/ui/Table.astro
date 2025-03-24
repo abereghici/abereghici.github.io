@@ -16,5 +16,25 @@ const { class: className, ...rest } = Astro.props;
 
   .custom-table {
     @apply w-full min-w-max overflow-x-scroll;
+
+    thead {
+      tr {
+        @apply border-highlight-high border-b;
+      }
+
+      th {
+        @apply text-left text-sm;
+      }
+    }
+
+    tbody {
+      tr {
+        @apply bg-surface even:bg-muted/5 hover:bg-muted/10 h-10 transition;
+      }
+
+      th {
+        @apply font-mono text-sm;
+      }
+    }
   }
 </style>

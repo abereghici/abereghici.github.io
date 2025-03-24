@@ -1,21 +1,32 @@
 ---
 import Code from "@/components/ui/Code.astro";
 import Heading1 from "@/components/ui/Heading1.astro";
+import Link from "@/components/ui/Link.astro";
 import Paragraph from "@/components/ui/Paragraph.astro";
-import { SITE_DESCRIPTION, SITE_TITLE } from "@/consts";
+import {
+  EMAIL,
+  GITHUB,
+  LINKEDIN,
+  SITE_AUTHOR,
+  SITE_DESCRIPTION,
+} from "@/consts";
 import Layout from "@/layouts/Layout.astro";
 ---
 
 <Layout
-  title={SITE_TITLE}
+  title={SITE_AUTHOR}
   description={SITE_DESCRIPTION}
   className="flex h-svh max-w-sm flex-col justify-center"
 >
   <main class="space-y-4">
     <Heading1>Hey, I'm Alexandru! </Heading1>
-    <Paragraph>A software engineer based in Chisinau, Moldova. </Paragraph>
-    <Paragraph>
-      I write <Code>.ts(x)</Code> files.
+    <Paragraph>I am a software engineer based in Chisinau, Moldova.</Paragraph>
+    <Paragraph>I write <Code>.ts(x)</Code> files.</Paragraph>
+    <Paragraph class="flex gap-3">
+      Let's connect{" "}
+      <Link href={`mailto:${EMAIL}`}>Email</Link>
+      <Link href={LINKEDIN} target="_blank">Linkedin</Link>
+      <Link href={GITHUB} target="_blank">Github</Link>
     </Paragraph>
   </main>
 </Layout>

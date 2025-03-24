@@ -34,7 +34,7 @@ const { Content } = await post.render();
 <Layout
   title={post.data.title}
   description={post.data.description}
-  image={post.data.image}
+  image={post.data.image || `/og-image/${post.slug}.png`}
 >
   <main>
     <h1 class="mb-5 text-xl font-bold">

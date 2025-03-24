@@ -1,19 +1,27 @@
 ---
 import Header from "@/components/Header.astro";
-import { cn } from "@/lib/utils";
+import { SITE_AUTHOR, SITE_TITLE } from "@/consts";
+import { cn, formatDate } from "@/lib/utils";
 import "@/styles/global.css";
 import { ClientRouter } from "astro:transitions";
 
 interface Props {
   title: string;
   description: string;
+  articleDate?: Date;
   image?: string;
   className?: string;
 }
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const { title, description, articleDate, image = "", className } = Astro.props;
 
-const { title, description, image = "", className } = Astro.props;
+const titleSeparator = "•";
+const siteTitle = `${title} ${titleSeparator} ${SITE_TITLE}`;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const socialImageURL = new URL(
+  image ? image : "/static/social-card.png",
+  Astro.url,
+).href;
 ---
 
 <html lang="en">
@@ -44,23 +52,66 @@ const { title, description, image = "", className } = Astro.props;
     <link rel="canonical" href={canonicalURL} />
 
     <!-- Primary Meta Tags -->
-    <title>{title}</title>
-    <meta name="title" content={title} />
+    <title>{siteTitle}</title>
+    <meta name="title" content={siteTitle} />
     <meta name="description" content={description} />
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content={Astro.url} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:image" content={new URL(image, Astro.url)} />
+    {/* Icons */}
+    <link href="/icon.svg" rel="icon" type="image/svg+xml" />
+    {
+      import.meta.env.PROD && (
+        <>
+          {/* Favicon & Apple Icon */}
+          <link rel="icon" href="/favicon-32x32.png" type="image/png" />
+          <link href="/icons/apple-touch-icon.png" rel="apple-touch-icon" />
+          {/* Manifest */}
+          <link href="/manifest.webmanifest" rel="manifest" />
+        </>
+      )
+    }
 
+    <meta content="" name="theme-color" />
+
+    <!-- Open Graph / Facebook -->
+    <meta content={articleDate ? "article" : "website"} property="og:type" />
+    <meta content={title} property="og:title" />
+    <meta content={description} property="og:description" />
+    <meta content={canonicalURL} property="og:url" />
+    <meta content={SITE_TITLE} property="og:site_name" />
+    <meta content="en-GB" property="og:locale" />
+    <meta content={socialImageURL} property="og:image" />
+    <meta content="1200" property="og:image:width" />
+    <meta content="630" property="og:image:height" />
+    {
+      articleDate && (
+        <>
+          <meta content={SITE_AUTHOR} property="article:author" />
+          <meta
+            content={formatDate(articleDate)}
+            property="article:published_time"
+          />
+        </>
+      )
+    }
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content={Astro.url} />
-    <meta property="twitter:title" content={title} />
-    <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={new URL(image, Astro.url)} />
+    <meta content="summary_large_image" property="twitter:card" />
+    <meta content={canonicalURL} property="twitter:url" />
+    <meta content={title} property="twitter:title" />
+    <meta content={description} property="twitter:description" />
+    <meta content={socialImageURL} property="twitter:image" />
+
+    <!-- Sitemap -->
+    <link href="/sitemap-index.xml" rel="sitemap" />
+
+    <!-- RSS auto-discovery -->
+    <link
+      href="/rss.xml"
+      rel="alternate"
+      title={SITE_TITLE}
+      type="application/rss+xml"
+    />
+
+    <meta content={Astro.generator} name="generator" />
 
     <ClientRouter />
   </head>
