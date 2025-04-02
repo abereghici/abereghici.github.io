@@ -7,4 +7,4 @@ export interface Props extends HTMLAttributes<"mark"> {}
 const { class: className, ...rest } = Astro.props;
 ---
 
-<mark class={cn("bg-gold/30", className)} {...rest}><slot /></mark>
+<mark class={cn("bg-gold/30 text-text", className)} {...rest}><slot /></mark>

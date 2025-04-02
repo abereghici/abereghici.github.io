@@ -1,0 +1,107 @@
+---
+title: "Exponential Backoff pattern"
+description: ""
+date: "Mar 31 2025"
+tags: ["patterns","javascript"]
+---
+
+Exponential Backoff pattern is a strategy where a system retries an operation (like polling data or handling failed requests) with increasing delays between each attempt.
+The delay typically grows exponentially, often doubling after each retry, to reduce load and give the system time to recover.
+
+## How It Works
+- **Initial Attempt**: When a request fails due to transient issues (e.g., network failure, rate limiting), the system waits for a short delay before retrying.
+- **Exponential Increase**: If the request keeps failing, the delay between retries increases exponentially, usually doubling each time.
+- **Max Attempts/Backoff Cap**: To prevent infinite retries, there is often a maximum retry limit or a maximum wait time.
+
+## Formula
+The delay between retries is often calculated as:
+
+T = B × 2<sup>n</sup>
+
+Where:
+
+T = Wait time before the next attempt
+
+B = Base delay (e.g., 100ms)
+
+n = Retry attempt number
+
+To introduce randomness and avoid collisions in concurrent systems, jitter (randomized delay) is often added.
+
+## Implementation in Typescript
+```ts
+function waitFor(milliseconds: number) {
+  return new Promise((resolve) =>
+    setTimeout(resolve, milliseconds));
+}
+
+function retry<T>(
+  promise: () => Promise<T>,
+  onRetry: () => void,
+  {
+    maxRetries,
+    withJitter = true
+  }: {
+    maxRetries: number
+    withJitter?: boolean
+  }) {
+  async function retryWithBackoff(retries: number) {
+    try {
+      if (retries > 0) {
+        // Exponential backoff
+        const baseDelay = 2 ** retries * 100;
+        // Jitter factor (random between 0.5x and 1.5x)
+        const jitter = withJitter ?
+          Math.random() + 0.5 :
+          1;
+        const timeToWait = baseDelay * jitter;
+
+        console.log(`waiting for ${timeToWait}ms...`);
+        await waitFor(timeToWait);
+      }
+      return await promise();
+    } catch (e) {
+      if (retries < maxRetries) {
+        onRetry();
+        return retryWithBackoff(retries + 1);
+      } else {
+        console.warn("Max retries reached.");
+        throw e;
+      }
+    }
+  }
+
+  return retryWithBackoff(0);
+}
+
+function generateFailableAPICall(retries: number) {
+  let counter = 0;
+  return function () {
+    if (counter < retries) {
+      counter++;
+      return Promise.reject(new Error("Simulated error"));
+    } else {
+      return Promise.resolve({ status: "ok" });
+    }
+  };
+}
+
+/*** Testing our Retry with Exponential Backoff */
+async function test() {
+  const apiCall = generateFailableAPICall(3);
+  const result = await retry(
+    apiCall,
+    () => {
+      console.log("onRetry called...");
+    },
+    {
+      maxRetries: 4,
+      withJitter: false
+    }
+  );
+
+  console.log(result.status === "ok");
+}
+
+test();
+```
