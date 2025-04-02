@@ -19,7 +19,7 @@ const titleSeparator = "•";
 const siteTitle = `${title} ${titleSeparator} ${SITE_TITLE}`;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const socialImageURL = new URL(
-  image ? image : "/static/social-card.png",
+  image ? image : "/static/social-card.jpg",
   Astro.url,
 ).href;
 ---
